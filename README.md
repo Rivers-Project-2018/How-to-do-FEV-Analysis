@@ -271,7 +271,7 @@ plt.text(0.4,-0.7,'$Q_T$ = 219.1m$^3$/s', size=15)
 plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
 ```
 <p align="center">
-  <img width="700" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Quadrant_Graph.png">
+  <img width="700" height="800" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Quadrant_Graph.png">
    <figcaption>Figure 1: The plot produced by the automated code; the top left displays the computed values of FEV, Tf, ht, hm, qt and qm in that order.</figcaption>
 </p>
 
