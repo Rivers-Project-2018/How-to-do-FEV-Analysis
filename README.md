@@ -1,4 +1,4 @@
-# How-to-do-FEV-Analysis
+# How to do FEV Analysis
 This page is intended for the general public. It provides a step by step guide on how to repeat the work completed in this repository for any river and location in the UK of your choice. 
 
 ## 1. Download Anaconda for free to get access to Spyder
@@ -45,8 +45,7 @@ Create a folder named "River" and save your xlsx in there with a name which incl
 
 ## 6. Processing your Formatted Data
 
-``Bash
-
+```
 ##Imput your own data here:
 #Your chosen threshold height.
 ht=3.9
@@ -270,7 +269,6 @@ plt.text(0.4,-0.55,'$h_T$ = 3.90m', size=15)
 plt.text(0.4,-0.625,'$h_m$ = 4.77m', size=15)
 plt.text(0.4,-0.7,'$Q_T$ = 219.1m$^3$/s', size=15)
 plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
-
 ```
 
 
