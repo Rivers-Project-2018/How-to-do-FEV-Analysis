@@ -45,7 +45,7 @@ Create a folder named "River" and save your xlsx in there with a name which incl
 
 ## 6. Processing your Formatted Data
 
-```
+```Bash
 ##Imput your own data here:
 #Your chosen threshold height.
 ht=3.9
