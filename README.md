@@ -216,7 +216,7 @@ for i in np.arange(l[m],max(Flow)+50,50):
     n.append(i)
 
 #If you wish to set the height to be shown on the axis by a certain increment, change all 
-#appearances of 0.5 in lines 173 and 177 to the desired increment, e.g 0.25 or 1.
+#appearances of 1 in lines 173 and 177 to the desired increment, e.g 0.25 or 0.5.
 #Otherwise leave as is.
 o=np.arange(0,max(height)+1,1)
 p=bisect.bisect(o,min(height))
