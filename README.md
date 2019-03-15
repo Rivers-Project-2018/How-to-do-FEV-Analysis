@@ -50,9 +50,6 @@ Create a folder named "River" and save your xlsx in there with a name which incl
 #Your chosen threshold height.
 ht=3.9
 
-#The number of days you are looking at:
-number_of_days=5
-
 #Your rating curve coeffecients, listed starting from those corresponding to
 #the lowest range of heights up until the heighest range.
 a=[0.156,0.028,0.153]
@@ -63,10 +60,6 @@ c=[30.69,27.884,30.127]
 #rating curve.
 lower_limits=[0.2,0.685,1.917]
 upper_limits=[0.685,1.917,4.17]
-
-#The increments of time your river height data is given in, converted into
-#seconds; e.g. 15 minute increments = 900 second increments.
-time_increment=900
 
 #You do not have to change the following.
 import matplotlib.pyplot as plt
@@ -82,14 +75,16 @@ fig, ax = plt.subplots()
 #is saved as) within the same folder as this code is saved. The first column must have the 
 #heading 'Time', with time values converted into days (with the digits beyond the
 #decimal point representing what the hours and seconds elapsed are in terms of a
-#fraction of a day, and the second column must have the heading 'Height'.
+#fraction of a day, more information on how to do this can be found at 
+#https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/README.md) 
+#and the second column must have the heading 'Height'.
 Data=pd.read_csv('Aire Data.csv')
 time=Data['Time']
 height=Data['Height']
 
 #Once you have run the file, type in your own values for FEV, Tf, ht,hm, qt
 #and qm (they will appear in the code output in that order). 
-#The value inputted here are for the exmaple aire data.
+#The values inputted here are for the exmaple Aire data.
 plt.text(0.4,-0.4,'$FEV$ ≈ 9.34Mm$^3$', size=15)
 plt.text(0.4,-0.475,'$T_f$ = 32.00hrs', size=15)
 plt.text(0.4,-0.55,'$h_T$ = 3.90m', size=15)
@@ -98,6 +93,10 @@ plt.text(0.4,-0.7,'$Q_T$ = 219.1m$^3$/s', size=15)
 plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
 
 #####You do not have to change the following.#####
+time_increment=(time[1]-time[0])*24*3600
+
+number_of_days=round(len(time)*(time[1]-time[0]),1)
+
 def scale(x):
     return ((x-min(x))/(max(x)-min(x)))
 scaledtime=scale(time)
@@ -139,7 +138,7 @@ negheight=-scaledheight
 negday=-(scaledtime)
 
 ax.plot(negheight,scaledFlow,'black',linewidth=2)
-ax.plot([0,-1],[0,1],'grey',linestyle='--',marker='',linewidth=2)
+ax.plot([0,-1],[0,1],'cornflowerblue',linestyle='--',marker='',linewidth=2)
 
 ax.plot(scaledtime, scaledFlow,'black',linewidth=2)
 ax.plot(negheight, negday,'black',linewidth=2)
@@ -156,7 +155,7 @@ for i in scaledFlow:
 d=np.array(scaledFlow)
 e=np.array(QT)
     
-ax.fill_between(scaledtime,d,e,where=d>=e,facecolor='gray')
+ax.fill_between(scaledtime,d,e,where=d>=e,facecolor='cornflowerblue')
 
 idx = np.argwhere(np.diff(np.sign(d - e))).flatten()
 
@@ -170,6 +169,8 @@ c=unscaletime(f)
 d=unscaletime(g)
 
 Tf=(d-c)*24
+
+time_increment=(time[1]-time[0])*24*3600
 
 flow = []
 for i in Flow:
@@ -198,11 +199,11 @@ ax.plot([g,g],[scaledqm,scaledqt], 'black',linewidth=1.5)
 plt.annotate(s='', xy=(f-1/100,-1/5), xytext=(g+1/100,-1/5), arrowprops=dict(arrowstyle='<->'))
 
 h=[]
-for i in range(1,number_of_days+1):
+for i in np.arange(1,number_of_days+1):
     h.append(i/number_of_days)
 
 #If you wish to set the flow to be shown on the axis by a certain increment, change all 
-#appearances of 50 in lines 159 and 163 to the desired increment, e.g 25 or 100.
+#appearances of 50 in lines 160 and 164 to the desired increment, e.g 25 or 100.
 #Otherwise leave as is.
 l=np.arange(0,max(Flow)+50,50)
 m=bisect.bisect(l,min(Flow))
@@ -212,7 +213,7 @@ for i in np.arange(l[m],max(Flow)+50,50):
     n.append(i)
 
 #If you wish to set the height to be shown on the axis by a certain increment, change all 
-#appearances of 0.5 in lines 169 and 173 to the desired increment, e.g 0.25 or 1.
+#appearances of 0.5 in lines 170 and 174 to the desired increment, e.g 0.25 or 1.
 #Otherwise leave as is.
 o=np.arange(0,max(height)+0.5,0.5)
 p=bisect.bisect(o,min(height))
