@@ -46,7 +46,7 @@ Create a folder named "River" and save your xlsx in there with a name which incl
 ## 6. Processing your Formatted Data
 
 ```Bash
-##Imput your own data here:
+##Imput your own data here:##
 #Your chosen threshold height.
 ht=3.9
 
@@ -87,7 +87,17 @@ Data=pd.read_csv('Aire Data.csv')
 time=Data['Time']
 height=Data['Height']
 
-##You do not have to change the following.
+#Once you have run the file, type in your own values for FEV, Tf, ht,hm, qt
+#and qm (they will appear in the code output in that order). 
+#The value inputted here are for the exmaple aire data.
+plt.text(0.4,-0.4,'$FEV$ ≈ 9.34Mm$^3$', size=15)
+plt.text(0.4,-0.475,'$T_f$ = 32.00hrs', size=15)
+plt.text(0.4,-0.55,'$h_T$ = 3.90m', size=15)
+plt.text(0.4,-0.625,'$h_m$ = 4.77m', size=15)
+plt.text(0.4,-0.7,'$Q_T$ = 219.1m$^3$/s', size=15)
+plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
+
+#####You do not have to change the following.#####
 def scale(x):
     return ((x-min(x))/(max(x)-min(x)))
 scaledtime=scale(time)
@@ -99,23 +109,22 @@ for i in height:
         HM.append(i)
 hm=sum(HM)/len(HM)
 
-#If your rating curve has 3 ranges of river heights, then you do not have to change this. If
-#,however, your rating curve has 2 ranges, then delete the 3rd line starting with
-#elif, and the line below it, and replace upper_limits[1] with max(height).
-#Reapeat this if you only have 1 range. If you have more than 3 ranges, replace 
-#replace max height with upper_limits[2] and write: elif x<=max(height) and x>lower_limits[3]
-#y = (c[3]*((x-a[3])**b[3])), below the line below that line. Continue on the same 
-#vein if your rating curve has even more ranges.
-def Q(x):
-    if x<=upper_limits[0] and x>lower_limits[0]:
-        y = (c[0]*((x-a[0])**b[0]))
-    elif x<=upper_limits[1] and x>lower_limits[1]:
-        y = (c[1]*((x-a[1])**b[1]))
-    elif x<=max(height) and x>lower_limits[2]:
-        y = (c[2]*((x-a[2])**b[2]))
-    return(y)  
+w=[]
+for i in range(len(a)):
+    w.append(i)
 
-#You do not have to change the following.
+def Q(x):
+    z=0
+    while z<w[-1]:
+        if x>lower_limits[z] and x<=upper_limits[z]:
+            y = (c[z]*((x-a[z])**b[z]))
+            break
+        elif x>upper_limits[z]:
+            z = z+1
+    else:
+        y = (c[w[-1]]*((x-a[w[-1]])**b[w[-1]]))
+    return(y)
+
 qt = Q(ht)     
     
 Flow = []
@@ -192,6 +201,9 @@ h=[]
 for i in range(1,number_of_days+1):
     h.append(i/number_of_days)
 
+#If you wish to set the flow to be shown on the axis by a certain increment, change all 
+#appearances of 50 in lines 159 and 163 to the desired increment, e.g 25 or 100.
+#Otherwise leave as is.
 l=np.arange(0,max(Flow)+50,50)
 m=bisect.bisect(l,min(Flow))
 
@@ -199,7 +211,9 @@ n=[]
 for i in np.arange(l[m],max(Flow)+50,50):
     n.append(i)
 
-
+#If you wish to set the height to be shown on the axis by a certain increment, change all 
+#appearances of 0.5 in lines 169 and 173 to the desired increment, e.g 0.25 or 1.
+#Otherwise leave as is.
 o=np.arange(0,max(height)+0.5,0.5)
 p=bisect.bisect(o,min(height))
 
@@ -260,15 +274,6 @@ print(ht)
 print(hm)
 print(qt)
 print(qm)
-
-#You would now run the file and type in your own values for FEV, Tf, ht,hm, qt
-#and qm (listed in the order they appear in the libes above). The value inputted here are for the exmaple aire data
-plt.text(0.4,-0.4,'$FEV$ ≈ 9.34Mm$^3$', size=15)
-plt.text(0.4,-0.475,'$T_f$ = 32.00hrs', size=15)
-plt.text(0.4,-0.55,'$h_T$ = 3.90m', size=15)
-plt.text(0.4,-0.625,'$h_m$ = 4.77m', size=15)
-plt.text(0.4,-0.7,'$Q_T$ = 219.1m$^3$/s', size=15)
-plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
 ```
 <p align="center">
   <img width="800" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Quadrant_Graph.png">
