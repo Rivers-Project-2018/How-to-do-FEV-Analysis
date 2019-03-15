@@ -281,7 +281,7 @@ print(qt)
 print(qm)
 ```
 <p align="center">
-  <img width="800" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Quadrant_Graph_Aire_Example.png">
+  <img width="800" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Graph-Aire_Example.png">
    <figcaption>Figure 1: The plot produced by the automated code; the top left displays the computed values of FEV, Tf, ht, hm, qt and qm in that order.</figcaption>
 </p>
 
