@@ -93,23 +93,22 @@ plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
 #there are instructions on how to do so.
 import bisect
 import numpy as np
+
 plt.rcParams["figure.figsize"] = [11,8]
 plt.rcParams['axes.edgecolor']='white'
+ax.spines['left'].set_position(('center'))
+ax.spines['bottom'].set_position(('center'))
+ax.spines['left'].set_color('black')
+ax.spines['bottom'].set_color('black')
 
 time_increment=(time[1]-time[0])*24*3600
 
-number_of_days=int(len(time)*(time[1]-time[0]))
+number_of_days=int((len(time)*(time[1]-time[0])))
 
 def scale(x):
     return ((x-min(x))/(max(x)-min(x)))
 scaledtime=scale(time)
 scaledheight=scale(height)
-
-HM = []
-for i in height:
-    if i>=ht:
-        HM.append(i)
-hm=sum(HM)/len(HM)
 
 w=[]
 for i in range(len(a)):
@@ -143,12 +142,10 @@ negday=-(scaledtime)
 #To change the colour, change 'conrflowerblue' to another colour such as 'pink'.
 ax.plot(negheight,scaledFlow,'black',linewidth=2)
 ax.plot([0,-1],[0,1],'cornflowerblue',linestyle='--',marker='',linewidth=2)
-
 ax.plot(scaledtime, scaledFlow,'black',linewidth=2)
 ax.plot(negheight, negday,'black',linewidth=2)
 
 scaledht = (ht-min(height))/(max(height)-min(height))
-scaledhm = (hm-min(height))/(max(height)-min(height))
 scaledqt = (qt-min(Flow))/(max(Flow)-min(Flow))
 
 QT=[]
@@ -156,12 +153,12 @@ for i in scaledFlow:
     i = scaledqt
     QT.append(i)
 
-d=np.array(scaledFlow)
+SF=np.array(scaledFlow)
 e=np.array(QT)
     
-ax.fill_between(scaledtime,d,e,where=d>=e,facecolor='cornflowerblue')
+ax.fill_between(scaledtime,SF,e,where=SF>=e,facecolor='cornflowerblue')
 
-idx = np.argwhere(np.diff(np.sign(d - e))).flatten()
+idx = np.argwhere(np.diff(np.sign(SF - e))).flatten()
 
 f=scaledtime[idx[0]]
 g=scaledtime[idx[-1]]
@@ -169,10 +166,10 @@ g=scaledtime[idx[-1]]
 def unscaletime(x):
     return (((max(time)-min(time))*x)+min(time))
 
-c=unscaletime(f)
+C=unscaletime(f)
 d=unscaletime(g)
 
-Tf=(d-c)*24
+Tf=(d-C)*24
 
 time_increment=(time[1]-time[0])*24*3600
 
@@ -186,8 +183,10 @@ FEV=sum(flow)
 Tfs=Tf*(60**2)
 
 qm=(FEV/Tfs)+qt
-
 scaledqm = (qm-min(Flow))/(max(Flow)-min(Flow))
+
+hm=((qm/c[-1])**(1/b[-1]))+a[-1]
+scaledhm = (hm-min(height))/(max(height)-min(height))
 
 ax.plot([-scaledht,-scaledht],[-1,scaledqt],'black',linestyle='--',linewidth=1)
 ax.plot([-scaledhm,-scaledhm],[-1,scaledqm],'black',linestyle='--',linewidth=1)
@@ -255,10 +254,6 @@ ax.set_yticks(ticks_y)
 ax.set_xticklabels(Ticks_x)
 ax.set_yticklabels(Ticks_y)
 
-ax.spines['left'].set_position(('center'))
-ax.spines['bottom'].set_position(('center'))
-ax.spines['left'].set_color('black')
-ax.spines['bottom'].set_color('black')
 ax.tick_params(axis='x',colors='black',direction='out',length=9,width=1)
 ax.tick_params(axis='y',colors='black',direction='out',length=10,width=1)
 
@@ -272,6 +267,8 @@ plt.text(0.01, 1.05,'$Q$ [m$^3$/s]', size=13)
 plt.text(0.95, -0.17,'$t$ [day]', size=13)
 plt.text(0.01, -1.09,'$t$ [day]', size=13)
 plt.text(-1.1, 0.02,'$\overline {h}$ [m]', size=13)
+
+ax.scatter(0,0,color='white')
 
 print(FEV)
 print(Tf)
