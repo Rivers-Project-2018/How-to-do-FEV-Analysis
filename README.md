@@ -64,10 +64,6 @@ upper_limits=[0.685,1.917,4.17]
 #You do not have to change the following.
 import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
-import bisect
-plt.rcParams["figure.figsize"] = [11,8]
-plt.rcParams['axes.edgecolor']='white'
 fig, ax = plt.subplots()
 
 #Import your data, your river height data must be saved into a csv file
@@ -95,6 +91,11 @@ plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
 #####You do not have to change any of the rest of the code.#####
 #But if you wish to change elements such as the colour or the x and y axis
 #there are instructions on how to do so.
+import bisect
+import numpy as np
+plt.rcParams["figure.figsize"] = [11,8]
+plt.rcParams['axes.edgecolor']='white'
+
 time_increment=(time[1]-time[0])*24*3600
 
 number_of_days=int(len(time)*(time[1]-time[0]))
