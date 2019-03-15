@@ -97,7 +97,7 @@ plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
 #there are instructions on how to do so.
 time_increment=(time[1]-time[0])*24*3600
 
-number_of_days=round(len(time)*(time[1]-time[0]),1)
+number_of_days=int(len(time)*(time[1]-time[0]))
 
 def scale(x):
     return ((x-min(x))/(max(x)-min(x)))
@@ -213,7 +213,7 @@ m=bisect.bisect(l,min(Flow))
 
 n=[]
 for i in np.arange(l[m],max(Flow)+50,50):
-    n.append(i)
+    n.append(int(i))
 
 #If you wish to set the height to be shown on the axis by a certain increment, change all 
 #appearances of 1 in lines 173 and 177 to the desired increment, e.g 0.25 or 0.5.
