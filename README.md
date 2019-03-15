@@ -92,7 +92,9 @@ plt.text(0.4,-0.625,'$h_m$ = 4.77m', size=15)
 plt.text(0.4,-0.7,'$Q_T$ = 219.1m$^3$/s', size=15)
 plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
 
-#####You do not have to change the following.#####
+#####You do not have to change any of the rest of the code.#####
+#But if you wish to change elements such as the colour or the x and y axis
+#there are instructions on how to do so.
 time_increment=(time[1]-time[0])*24*3600
 
 number_of_days=round(len(time)*(time[1]-time[0]),1)
@@ -137,6 +139,7 @@ for i in Flow:
 negheight=-scaledheight
 negday=-(scaledtime)
 
+#To change the colour, change 'conrflowerblue' to another colour such as 'pink'.
 ax.plot(negheight,scaledFlow,'black',linewidth=2)
 ax.plot([0,-1],[0,1],'cornflowerblue',linestyle='--',marker='',linewidth=2)
 
@@ -203,7 +206,7 @@ for i in np.arange(1,number_of_days+1):
     h.append(i/number_of_days)
 
 #If you wish to set the flow to be shown on the axis by a certain increment, change all 
-#appearances of 50 in lines 160 and 164 to the desired increment, e.g 25 or 100.
+#appearances of 50 in lines 163 and 167 to the desired increment, e.g 25 or 100.
 #Otherwise leave as is.
 l=np.arange(0,max(Flow)+50,50)
 m=bisect.bisect(l,min(Flow))
@@ -213,13 +216,13 @@ for i in np.arange(l[m],max(Flow)+50,50):
     n.append(i)
 
 #If you wish to set the height to be shown on the axis by a certain increment, change all 
-#appearances of 0.5 in lines 170 and 174 to the desired increment, e.g 0.25 or 1.
+#appearances of 0.5 in lines 173 and 177 to the desired increment, e.g 0.25 or 1.
 #Otherwise leave as is.
-o=np.arange(0,max(height)+0.5,0.5)
+o=np.arange(0,max(height)+1,1)
 p=bisect.bisect(o,min(height))
 
 q=[]
-for i in np.arange(o[p],max(height)+0.5,0.5):
+for i in np.arange(o[p],max(height)+1,1):
     q.append(i)
 
 k=[]
