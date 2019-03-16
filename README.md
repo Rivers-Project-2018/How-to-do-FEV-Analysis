@@ -78,16 +78,6 @@ Data=pd.read_csv('Aire Data.csv')
 time=Data['Time']
 height=Data['Height']
 
-#Once you have run the file, type in your own values for FEV, Tf, ht,hm, qt
-#and qm (they will appear in the code output in that order). 
-#The values inputted here are for the exmaple Aire data.
-plt.text(0.4,-0.4,'$FEV$ ≈ 9.34Mm$^3$', size=15)
-plt.text(0.4,-0.475,'$T_f$ = 32.00hrs', size=15)
-plt.text(0.4,-0.55,'$h_T$ = 3.90m', size=15)
-plt.text(0.4,-0.625,'$h_m$ = 4.77m', size=15)
-plt.text(0.4,-0.7,'$Q_T$ = 219.1m$^3$/s', size=15)
-plt.text(0.4,-0.775,'$Q_m$ = 300.2m$^3$/s', size=15)
-
 #####You do not have to change any of the rest of the code.#####
 #But if you wish to change elements such as the colour or the x and y axis
 #there are instructions on how to do so.
@@ -206,7 +196,7 @@ for i in np.arange(1,number_of_days+1):
     h.append(i/number_of_days)
 
 #If you wish to set the flow to be shown on the axis by a certain increment, change all 
-#appearances of 50 in lines 163 and 167 to the desired increment, e.g 25 or 100.
+#appearances of 50 in lines 153 and 157 to the desired increment, e.g 25 or 100.
 #Otherwise leave as is.
 l=np.arange(0,max(Flow)+50,50)
 m=bisect.bisect(l,min(Flow))
@@ -216,7 +206,7 @@ for i in np.arange(l[m],max(Flow)+50,50):
     n.append(int(i))
 
 #If you wish to set the height to be shown on the axis by a certain increment, change all 
-#appearances of 1 in lines 173 and 177 to the desired increment, e.g 0.25 or 0.5.
+#appearances of 1 in lines 163 and 167 to the desired increment, e.g 0.25 or 0.5.
 #Otherwise leave as is.
 o=np.arange(0,max(height)+1,1)
 p=bisect.bisect(o,min(height))
@@ -270,15 +260,22 @@ plt.text(-1.1, 0.02,'$\overline {h}$ [m]', size=13)
 
 ax.scatter(0,0,color='white')
 
-print(FEV)
-print(Tf)
-print(ht)
-print(hm)
-print(qt)
-print(qm)
+A=round(FEV/(10**6),2)
+B=round(Tf,2)
+C=round(ht,2)
+D=round(hm,2)
+E=round(qt,2)
+F=round(qm,2)
+
+plt.text(0.4,-0.4,'$FEV$ ≈ '+ str(A) +'Mm$^3$', size=15)
+plt.text(0.4,-0.475,'$T_f$ = '+ str(B) +'hrs', size=15)
+plt.text(0.4,-0.55,'$h_T$ = '+ str(C) +'m', size=15)
+plt.text(0.4,-0.625,'$h_m$ = '+ str(D) +'m', size=15)
+plt.text(0.4,-0.7,'$Q_T$ = '+ str(E) +'m$^3$/s', size=15)
+plt.text(0.4,-0.775,'$Q_m$ = '+ str(F) +'m$^3$/s', size=15)
 ```
 <p align="center">
-  <img width="800" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Aire_Example.png">
+  <img width="800" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Graph.png">
    <figcaption>Figure 1: The plot produced by the automated code; the top left displays the computed values of FEV, Tf, ht, hm, qt and qm in that order.</figcaption>
 </p>
 
