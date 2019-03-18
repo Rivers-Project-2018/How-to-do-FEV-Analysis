@@ -328,7 +328,7 @@ ax.set_ylim(0,sl)
 ax.set_zlim(0,10)
 ```
 <p align="center">
-  <img width="800" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Graph-Aire.png">
+  <img width="800" height="1000" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Graph-Aire.png">
    <figcaption>Figure 1: The plot produced by the automated code; the top left displays the computed values of FEV, Tf, ht, hm, qt and qm in that order.</figcaption>
 </p>
 
