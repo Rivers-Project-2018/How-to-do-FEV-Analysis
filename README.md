@@ -273,6 +273,59 @@ plt.text(0.4,-0.55,'$h_T$ = '+ str(C) +'m', size=15)
 plt.text(0.4,-0.625,'$h_m$ = '+ str(D) +'m', size=15)
 plt.text(0.4,-0.7,'$Q_T$ = '+ str(E) +'m$^3$/s', size=15)
 plt.text(0.4,-0.775,'$Q_m$ = '+ str(F) +'m$^3$/s', size=15)
+
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure(figsize=plt.figaspect(1)*0.7)
+ax = Axes3D(fig)
+plt.rcParams['axes.edgecolor']='white'
+plt.rcParams["figure.figsize"] = [10,8]
+
+ax.grid(False)
+ax.xaxis.pane.fill = False
+ax.yaxis.pane.fill = False
+ax.zaxis.pane.fill = False
+
+ax.xaxis.pane.set_edgecolor('w')
+ax.yaxis.pane.set_edgecolor('w')
+ax.zaxis.pane.set_edgecolor('w')
+
+sl = (FEV/2)**0.5
+
+a = [sl, sl]
+b = [sl, sl]
+c = [2, 0]
+
+d = [sl, 0]
+e = [sl, sl]
+f = [0, 0]
+
+g = [sl, sl]
+h = [sl, 0]
+i = [0, 0]
+
+ax.plot(a, b, c, '--', color = 'k')
+ax.plot(d, e, f, '--', color = 'k')
+ax.plot(g, h, i, '--', color = 'k')
+
+x = [sl, sl, sl, 0, 0, 0, sl, sl, 0, 0, 0, 0]
+y = [sl, 0, 0, 0, 0, sl, sl, 0, 0, 0, sl, sl]
+z = [2, 2, 0, 0, 2, 2, 2, 2, 2, 0, 0, 2]
+
+ax.plot(x, y, z, color = 'k')
+
+ax.text(5*(sl/9), -5*(sl/9), 0, 'Side-length [m]', size=13)
+ax.text(-sl/4, sl/4, 0, 'Side-length [m]', size=13)
+ax.text(-0.02*sl, 1.01*sl, 0.8, 'Depth [m]',size=13)
+
+ax.text(7*(sl/10), 5*(sl/4), 1, ''+str(int(round(sl)))+'m', size=13)
+ax.text(14*(sl/10), 6*(sl/10), 1, ''+str(int(round(sl)))+'m', size=13)
+
+ax.set_zticks([0, 2])
+
+ax.set_xlim(sl,0)
+ax.set_ylim(0,sl)
+ax.set_zlim(0,10)
 ```
 <p align="center">
   <img width="800" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/Automated-Graph.png">
