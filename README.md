@@ -503,9 +503,13 @@ title(main="River Aire Data")
 ```
 
 <p align="center">
-  <img width="700" height="1000" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/River Aire Plot from Automated RCode.png">
+  <img width="700" height="900" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/River Aire Plot from Automated RCode.png">
    <figcaption>Figure 2: The plot attained after using the automated R code.</figcaption>
 </p>
+
+
+
+
 
 **References used in this code:**
 1. Bokhove, O., Kelmanson, M.A., Kent, T., Piton, G. and Tacnet, J.M. *Using ‘flood-excess volume’ to assess and communicate flood-mitigation schemes*. [Online poster]. 2018. [Accessed 4 November 2018]. Available from: http://www1.maths.leeds.ac.uk/
