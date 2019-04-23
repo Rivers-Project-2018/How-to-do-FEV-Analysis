@@ -1,8 +1,8 @@
 # How to do FEV Analysis
 This page is intended for the general public. It provides a step by step guide on how to repeat the work completed in this repository for any river and location in the UK of your choice. 
 
-## 1. Download Anaconda for free to get access to Spyder
-Spyder is an open source data handling programme which uses Python language. https://www.anaconda.com/distribution/
+## 1. Download Anaconda for free to get access to Spyder or RStudio
+Spyder is an open source data handling programme which uses Python language. RStudio is similar to Spyder in that it is also an open source programme. RStudio uses R programming language. https://www.anaconda.com/distribution/
 
 ## 2. Pick a flood
 This could be a flood event which affected you or one which you saw in the news. Take note of the month and year that this flood took place in. 
@@ -44,6 +44,8 @@ Make sure that the first row is a header-row with each column having a different
 Create a folder named "River" and save your xlsx in there with a name which includes the River, the Station, the Month and Year of flooding e.g River_Aire_Armley_Dec2015.xlsx. Now re-save your file as a csv. e.g River_Aire_Armley_Dec2015.csv.
 
 ## 6. Processing your Formatted Data
+
+### 6.1 For Spyder
 
 ```Bash
 ##Imput your own data here:##
@@ -332,5 +334,202 @@ ax.set_zlim(0,10)
    <figcaption>Figure 1: The plot produced by the automated code; the top left displays the computed values of FEV, Tf, ht, hm, qt and qm in that order.</figcaption>
 </p>
 
+### 6.2 For RStudio
 
+```Bash
+# The following is based on the Aire graph presented on [1].
 
+# Import the data required; in RStudio the import can be made by
+# clicking the file needed and selecting Import Dataset when the drop down tab appears
+
+library(readxl)
+River_Aire_Data <- read_excel("Desktop/University_of_Leeds/Project/ArmleyF1707Stage_and_Flow15min_25Decto30Dec.xlsx")
+# edited [2][3]
+
+# simplifying column names
+t=River_Aire_Data$Time 
+Q=River_Aire_Data$Flow
+h=River_Aire_Data$Height
+
+library(readxl)
+Rating_Curves <- read_excel("Desktop/University_of_Leeds/Project/Rating Curves.xlsx", 
+                            sheet = "Sheet2", col_types = c("numeric", 
+                                                            "numeric", "numeric", "numeric", 
+                                                            "numeric", "skip", "skip", "skip", 
+                                                            "skip", "skip", "skip", "skip", 
+                                                            "skip", "skip", "skip"))
+# [4]
+
+AireC=Rating_Curves$Aire_C # simplifying Rating Curve data names
+Airea=Rating_Curves$Aire_a
+Aireb=Rating_Curves$Aire_b
+
+hA=seq(from=0.16, to=6, by=0.01)
+# Creating a new height matrix/vector - suggested by Supervisor [5].
+# Found in RStudio help section.
+
+# Creating a new discharge matrix for the rating curve [5][6].
+QA=matrix(nrow=585, ncol=1)
+
+for(i in 1:585) { 
+  if(hA[i]<0.685) QA[i]=AireC[1]*(hA[i]-Airea[1])^Aireb[1]
+  if(0.685<=hA[i] & hA[i]<1.917) QA[i]=AireC[2]*(hA[i]-Airea[2])^Aireb[2]
+  if(1.917<=hA[i]) QA[i]=AireC[3]*(hA[i]-Airea[3])^Aireb[3]
+  ## To imput the data into the QA matrix; notified of for loop by [7, p.470].
+}
+
+ht=3.9 # able to change and Qt will automatically change
+Qt=AireC[3]*(ht-Airea[3])^Aireb[3]
+hm=4.77 # able to change and Qm will automatically change
+Qm=AireC[3]*(hm-Airea[3])^Aireb[3]
+
+# FEV Calculation
+deltk=900 # 15 minutes in seconds [8].
+# Notified of which function by supervisor [8].
+# Looked at RStudio help section for structure.
+QfFEV=Q[which(Q>Qt)]
+FEVA=sum(QfFEV-Qt)*deltk # FEV for the Aire
+
+# to automate the code
+tf_sc=t_sc[which(Q>Qt)]
+tfscl=length(tf_sc)
+Qf_sc=Q_sc[which(Q>Qt)]
+
+t_min=min(t) # Setting the min and max points for t, h, Q
+t_max=max(t)
+h_min=0
+h_max=6
+Q_min=0
+Q_max=350
+QA_min=0
+QA_max=350
+
+t_sc=(t-t_min)/(t_max-t_min) # Creating the scaled vectors of t, h, Q; [9].
+h_sc=(h-h_min)/(h_max-h_min)
+hA_sc=(hA-h_min)/(h_max-h_min)
+Q_sc=(Q-Q_min)/(Q_max-Q_min)
+QA_sc=(QA-QA_min)/(QA_max-QA_min)
+
+# scaled ht, hm, Qt, Qm
+ht_sc=(ht-h_min)/(h_max-h_min)
+hm_sc=(hm-h_min)/(h_max-h_min)
+Qt_sc=(Qt-QA_min)/(QA_max-QA_min)
+Qm_sc=(Qm-QA_min)/(QA_max-QA_min)
+
+plot(0,0, axes=FALSE, xlim=cbind(-1.1,1.1), ylim=cbind(-1.1,1.1), type="l", xlab="", ylab="")
+# creating an empty graph [7, p.104-5][10] <- easiest way to combine the 3 plots
+lines(x=t_sc, y=Q_sc, type="l") # [7, p.104-5]
+# ^ line for Day vs. Discharge 
+
+segments(-hm_sc, Qm_sc, 1, Qm_sc, lty=2)
+# Notified of segments function by fellow project member; dotted lines for Qm and Qt [11]. 
+# Looked at RStudio help section for structure.
+segments(-ht_sc, Qt_sc, 1, Qt_sc, lty=2)
+
+# lines defining Tf
+segments(tf_sc[1], -1/4, tf_sc[1], 1, lty=2) 
+segments(tf_sc[tfscl], -1/4,tf_sc[tfscl], 1, lty=2)
+
+polygon(cbind(tf_sc[1], tf_sc, tf_sc[tfscl]), cbind(Qt_sc, Qf_sc[1:tfscl], Qt_sc), col="grey") 
+# creation of shading above Qt, [12, pp.50-58].
+# Use of specific coordinates suggested by fellow group member [11].
+
+text(cbind(0,0.25,0.5,0.75,1),cbind(-0.1,-0.1,-0.1,-0.1,-0.1), labels=cbind(25,26,27,28,29), cex=0.75) 
+# adding in axis points by text function; notified of text function by [7, p.105]. 
+# Looked at RStudio help section
+text(cbind(-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1),cbind(1/7,2/7,3/7,4/7,5/7,6/7,1), labels=cbind(50,100,150,200,250,300,350), cex=0.75)
+
+# FEV box created by following
+segments(tf_sc[tfscl], Qt_sc, tf_sc[1], Qt_sc, lty=1, lwd=2)
+segments(tf_sc[tfscl], Qm_sc, tf_sc[1], Qm_sc, lty=1, lwd=2)
+segments(tf_sc[1], Qt_sc, tf_sc[1], Qm_sc, lty=1, lwd=2)
+segments(tf_sc[tfscl], Qt_sc, tf_sc[tfscl], Qm_sc, lty=1, lwd=2)
+
+lines(x=-hA_sc, y=QA_sc, type="l") # [6, p.104-5] 
+# ^ line defining the rating curve
+segments(-hA_sc[1], QA_sc[1], -hA_sc[585], QA_sc[585], lty=2) # dotted line for rating curve
+
+segments(-hm_sc, -1, -hm_sc,Qm_sc, lty=2) 
+# dotted lines for hm and ht
+segments(-ht_sc, -1, -ht_sc, Qt_sc, lty=2) 
+
+lines(x=-h_sc, y=-t_sc, type="l")
+# ^ line for Height vs. Day
+
+axis(1, at = NULL, labels = FALSE, tick = TRUE, pos = 0,0, lwd.ticks=0)
+# Adding horizontal axis. Found function via RStudio help section
+
+text(cbind(-0.1,-0.1,-0.1,-0.1), cbind(-0.25,-0.5,-0.75,-1), labels=cbind(26,27,28,29), cex=0.75) 
+# adding in axis points by text function
+text(cbind(-1/6,-2/6,-3/6,-4/6,-5/6,-1), cbind(-0.1,-0.1,-0.1,-0.1,-0.1,-0.1), labels=cbind(1,2,3,4,5,6), cex=0.75)
+
+axis(2, at = NULL, labels = FALSE, tick = TRUE, pos = 0,0, lwd.ticks=0)
+# Adding vertical axis.
+
+arrows(tf_sc[1],-0.245,tf_sc[tfscl],-0.245, length=0.1) # [13, pg 79]
+# arrows defining/showing Tf
+arrows(tf_sc[tfscl],-0.245,tf_sc[1],-0.245, length=0.1)
+
+mtext(expression("Discharge [m"^"3"~"/s]"), 3)
+# Found expression function via [14]
+# expression used for subscript, superscript, and etc; how to correctly insert non-ASCII characters given by: [15].
+# Adding axis labels; notified of mtext function by [7, p.105].
+
+# The following text (140-162) is as stated on Onno & Tom's poster [1] 
+text(1.1, Qt_sc, expression("Q"[t])) 
+text(1.1, Qm_sc, expression("Q"[m]))
+midp=(tf_sc[1]+tf_sc[tfscl])/2
+text(midp, -0.35, expression("T"[f]), cex=0.75)
+text(-ht_sc, -1.1, expression("h"[t]))
+text(-hm_sc, -1.1, expression("h"[m]))
+# ^ placement of Qt, Qm, Tf, ht, and hm 
+text(0.5, -0.45, expression("FEV" %~~%  "9.34 Mm" ^ "3"),cex=0.875)
+text(0.37, -0.55, expression("h"[t]), cex=0.875) 
+text(0.5, -0.55,labels = "= 3.9 m", cex=0.875)
+text(0.34, -0.65, expression("h"[m]), cex=0.875) 
+text(0.5, -0.65,labels = "= 4.77 m", cex=0.875)
+text(0.34, -0.75, expression("Q"[t]), cex=0.875)
+text(0.545, -0.75, expression("= 219.1 m" ^ "3"~"/s"), cex=0.875) 
+text(0.34, -0.85, expression("Q"[m]), cex=0.875)
+text(0.545, -0.85, expression("= 300.2 m" ^ "3"~"/s"), cex=0.875) 
+text(0.375, -0.95, expression("T"[f]), cex=0.875) 
+text(0.54, -0.95, labels = "= 32hrs", cex=0.875) 
+
+mtext("Height [m]", 2, las=1) 
+mtext("Day", 4, las=1)
+mtext("Day", 1, las=1)
+title(main="River Aire Data")
+# Notified of title function by [7, p.105].
+```
+
+**References used in this code:**
+1. Bokhove, O., Kelmanson, M.A., Kent, T., Piton, G. and Tacnet, J.M. *Using ‘flood-excess volume’ to assess and communicate flood-mitigation schemes*. [Online poster]. 2018. [Accessed 4 November 2018]. Available from: http://www1.maths.leeds.ac.uk/
+
+2. Bokhove,O. *Armley F1707 Flow 15min May 15 to Mar 16.csv*. [Online]. 2018. [Accessed 8 October 2018]. Available from: https://github.com/obokhove/RiverAireDonCalder
+
+3. Bokhove,O. *Armley F1707 Stage 15min May 15 to Mar 16.csv*. [Online]. 2018. [Accessed 8 October 2018]. Available from: https://github.com/obokhove/RiverAireDonCalder
+
+4. Bokhove,O. *Rating Curves.xlsx*. [Online]. 2018. [Accessed 8 October 2018]. Available from: https://github.com/obokhove/RiverAireDonCalder
+
+5. Kent, T. *Conversation with Sophie Kennett, Abbey Chapman, Jack Willis, Mary Saunders, and Antonia Feilden*, 12 November, 2018.
+
+6. DataCamp. 2015. *R tutorial - Learn How to Create and Name Matrices in R*. 
+[Online]. [Accessed November 2018]. Available from: https://www.youtube.com/
+
+7. Verzani, J. *Using R for introductory Statistics*. 2nd ed. Boca Raton: CRC Press, Taylor \& Francis Group, 2014.
+
+8. Kent, T. *Conversation with Sophie Kennett*, 12 March, 2019.
+
+9. Kent, T. *Conversation with Sophie Kennett, Abbey Chapman, Jack Willis, Mary Saunders, and Antonia Feilden*, 12 October, 2018.
+
+10. Saunders, M, and Chapman, A. *Conversation with Sophie Kennett, Abbey Chapman, Jack Willis, Mary Saunders, and Antonia Feilden*, c. 6 November, 2018.
+
+11. Saunders, M. *Conversation with Sophie Kennett*, c. 27 November, 2018.
+
+12. Lillis, D.A. *R Graphic Essentials*. Birmingham: Packt Publishing, 2014.
+
+13. Murrell, P. *R Graphics*. [Online]. 2nd ed. Boca Roca: CRC Press, Taylor \& Francis Inc, 2016. [Accessed 30 October 2018]. Available from: https://books.google.co.uk/
+
+14. StackOverflow. *Plot text containing ”approximately equal to” in R*. [Online]. [no date]. [Accessed 9 March 2019]. Available from: https://stackoverflow.com/
+
+15. AstroStatistics. *Mathematical Annotation in R*. [Online]. [no date]. [Accessed 9 March 2019]. Available from: http://astrostatistics.psu.edu/su07/R/html/grDevices/html/plotmath.html
