@@ -336,12 +336,6 @@ ax.set_zlim(0,10)
 
 ### 6.2 For RStudio
 
-<p align="center">
-    ```Bash
-    # FEV Calculation
-    ```
-</p>
-
 ```Bash
 # The following is based on the Aire graph presented on [1].
 
