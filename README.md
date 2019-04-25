@@ -507,7 +507,7 @@ title(main="River Aire Data")
 ```
 
 <p align="center">
-  <img width="700" height="900" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/River Aire Plot from Automated RCode.png">
+  <img width="700" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/River Aire Plot from Automated RCode.png">
    <figcaption>Figure 2: The plot attained after using the automated R code.</figcaption>
 </p>
 
