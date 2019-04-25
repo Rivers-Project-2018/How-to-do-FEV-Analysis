@@ -336,6 +336,8 @@ ax.set_zlim(0,10)
 
 ### 6.2 For RStudio
 
+According to Bokhove, et al. [1], the flood excess volume (FEV) can be calculated in multiple ways; in the R code the sum((Q>Q<sub>t</sub>) - Q<sub>t</sub>) x Δt approximation has been used. This is evidenced by the five lines of code under the # FEV calculation comment.
+
 ```Bash
 # The following is based on the Aire graph presented on [1].
 
@@ -507,11 +509,8 @@ title(main="River Aire Data")
    <figcaption>Figure 2: The plot attained after using the automated R code.</figcaption>
 </p>
 
+**References for Section 6.2:**
 
-
-
-
-**References used in this code:**
 1. Bokhove, O., Kelmanson, M.A., Kent, T., Piton, G. and Tacnet, J.M. *Using ‘flood-excess volume’ to assess and communicate flood-mitigation schemes*. [Online poster]. 2018. [Accessed 4 November 2018]. Available from: http://www1.maths.leeds.ac.uk/
 
 2. Bokhove,O. *Armley F1707 Flow 15min May 15 to Mar 16.csv*. [Online]. 2018. [Accessed 8 October 2018]. Available from: https://github.com/obokhove/RiverAireDonCalder
