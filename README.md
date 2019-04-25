@@ -45,6 +45,8 @@ Create a folder named "River" and save your xlsx in there with a name which incl
 
 ## 6. Processing your Formatted Data
 
+NOTE: if you are not given rating curve coefficients, but you are given the height data for your chosen river you could simply remove the rating curve section of the code and use the data given to construct your graph and FEV.
+
 ### 6.1 For Spyder
 
 ```Bash
