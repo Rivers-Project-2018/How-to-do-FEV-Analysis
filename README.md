@@ -346,9 +346,11 @@ In the R code below, the sum((Q>Q<sub>t</sub>) - Q<sub>t</sub>) x Δt approximat
 # Import the data required; in RStudio the import can be made by
 # clicking the file needed and selecting Import Dataset when the drop down tab appears
 
-library(readxl)
-River_Aire_Data <- read_excel("Desktop/University_of_Leeds/Project/ArmleyF1707Stage_and_Flow15min_25Decto30Dec.xlsx")
+library(readxl) # choice of library
+River_Aire_Data <- read_excel("Desktop/University_of_Leeds/Project/
+                               ArmleyF1707Stage_and_Flow15min_25Decto30Dec.xlsx")
 # edited [2][3]
+# naming the data; normally defined in one line of code
 
 # simplifying column names
 t=River_Aire_Data$Time 
