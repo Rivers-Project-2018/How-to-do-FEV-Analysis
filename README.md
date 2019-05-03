@@ -487,6 +487,7 @@ text(midp, -0.35, expression("T"[f]), cex=0.75)
 text(-ht_sc, -1.1, expression("h"[t]))
 text(-hm_sc, -1.1, expression("h"[m]))
 # ^ placement of Qt, Qm, Tf, ht, and hm 
+# The following code could not be automated and may need to be changed for your own needs!
 text(0.5, -0.45, expression("FEV" %~~%  "9.34 Mm" ^ "3"),cex=0.875)
 text(0.37, -0.55, expression("h"[t]), cex=0.875) 
 text(0.5, -0.55,labels = "= 3.9 m", cex=0.875)
