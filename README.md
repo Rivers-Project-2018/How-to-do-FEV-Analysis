@@ -480,7 +480,7 @@ mtext(expression("Discharge [m"^"3"~"/s]"), 3)
 # how to correctly insert non-ASCII characters given by: [15].
 # Adding axis labels; notified of mtext function by [7, p.105].
 
-# The following text (140-162) is as stated on Onno & Tom's poster [1] 
+# The following text (140-162) is as stated on our supervisor's poster [1] 
 text(1.1, Qt_sc, expression("Q"[t])) 
 text(1.1, Qm_sc, expression("Q"[m]))
 midp=(tf_sc[1]+tf_sc[tfscl])/2
