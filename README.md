@@ -476,7 +476,8 @@ arrows(tf_sc[tfscl],-0.245,tf_sc[1],-0.245, length=0.1)
 
 mtext(expression("Discharge [m"^"3"~"/s]"), 3)
 # Found expression function via [14]
-# expression used for subscript, superscript, and etc; how to correctly insert non-ASCII characters given by: [15].
+# expression used for subscript, superscript, and etc; 
+# how to correctly insert non-ASCII characters given by: [15].
 # Adding axis labels; notified of mtext function by [7, p.105].
 
 # The following text (140-162) is as stated on Onno & Tom's poster [1] 
