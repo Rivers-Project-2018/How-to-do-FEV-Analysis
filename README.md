@@ -338,7 +338,7 @@ ax.set_zlim(0,10)
 
 ### 6.2 For RStudio
 
-In the R code below, the sum((Q>Q<sub>t</sub>) - Q<sub>t</sub>) x Δt approximation for FEV has been used [1]. This is evidenced by the five lines of code under the # FEV calculation comment.
+In the R code below, the \sum((Q>Q<sub>t</sub>) - Q<sub>t</sub>) x 900 approximation for FEV has been used [1]. This is evidenced by the five lines of code under the # FEV calculation comment.
 
 ```Bash
 # The following is based on the Aire graph presented on [1].
