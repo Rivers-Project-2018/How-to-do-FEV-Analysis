@@ -519,26 +519,26 @@ title(main="River Aire Data")
 
 1. Bokhove, O., Kelmanson, M.A., Kent, T., Piton, G. and Tacnet, J.M. *Using ‘flood-excess volume’ to assess and communicate flood-mitigation schemes*. [Online poster]. 2018. [Accessed 4 November 2018]. Available from: http://www1.maths.leeds.ac.uk/
 
-2. Bokhove,O. *Armley F1707 Flow 15min May 15 to Mar 16.csv*. [Online]. 2018. [Accessed 8 October 2018]. Available from: https://github.com/obokhove/RiverAireDonCalder
+2. Environment Agency. Armley F1707 Flow 15min May 15 to Mar 16.csv. Unpublished, [no date].
 
-3. Bokhove,O. *Armley F1707 Stage 15min May 15 to Mar 16.csv*. [Online]. 2018. [Accessed 8 October 2018]. Available from: https://github.com/obokhove/RiverAireDonCalder
+3. Environment Agency. Armley F1707 Stage 15min May 15 to Mar 16.csv. Unpublished, [no date].
 
-4. Bokhove,O. *Rating Curves.xlsx*. [Online]. 2018. [Accessed 8 October 2018]. Available from: https://github.com/obokhove/RiverAireDonCalder
+4. Environment Agency. Rating Curves.xlsx. Unpublished, [no date].
 
-5. Kent, T. *Conversation with Sophie Kennett, Abbey Chapman, Jack Willis, Mary Saunders, and Antonia Feilden*, 12 November, 2018.
+5. Kent, T. *Conversation with S. Kennett, A. Chapman, J. Willis, M. Saunders, and A. Feilden*, 12 November, 2018.
 
 6. DataCamp. 2015. *R tutorial - Learn How to Create and Name Matrices in R*. 
 [Online]. [Accessed November 2018]. Available from: https://www.youtube.com/
 
 7. Verzani, J. *Using R for introductory Statistics*. 2nd ed. Boca Raton: CRC Press, Taylor \& Francis Group, 2014.
 
-8. Kent, T. *Conversation with Sophie Kennett*, 12 March, 2019.
+8. Kent, T. *Conversation with S. Kennett*, 12 March, 2019.
 
-9. Kent, T. *Conversation with Sophie Kennett, Abbey Chapman, Jack Willis, Mary Saunders, and Antonia Feilden*, 12 October, 2018.
+9. Kent, T. *Conversation with S. Kennett, A. Chapman, J. Willis, M. Saunders, and A. Feilden*, 12 October, 2018.
 
 10. Saunders, M, and Chapman, A. *Conversation with Sophie Kennett, Abbey Chapman, Jack Willis, Mary Saunders, and Antonia Feilden*, c. 6 November, 2018.
 
-11. Saunders, M. *Conversation with Sophie Kennett*, c. 27 November, 2018.
+11. Saunders, M. *Conversation with S. Kennett*, c. 27 November, 2018.
 
 12. Lillis, D.A. *R Graphic Essentials*. Birmingham: Packt Publishing, 2014.
 
