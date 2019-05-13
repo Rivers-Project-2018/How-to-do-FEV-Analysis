@@ -536,7 +536,7 @@ title(main="River Aire Data")
 
 9. Kent, T. *Conversation with S. Kennett, A. Chapman, J. Willis, M. Saunders, and A. Feilden*, 12 October, 2018.
 
-10. Saunders, M, and Chapman, A. *Conversation with Sophie Kennett, Abbey Chapman, Jack Willis, Mary Saunders, and Antonia Feilden*, c. 6 November, 2018.
+10. Saunders, M, and Chapman, A. *Conversation with S. Kennett, A. Chapman, J. Willis, M. Saunders, and A. Feilden*, c. 6 November, 2018.
 
 11. Saunders, M. *Conversation with S. Kennett*, c. 27 November, 2018.
 
