@@ -2,7 +2,7 @@
 This page is intended for the general public. It provides a step by step guide on how to repeat the work completed in this repository for any river and location in the UK of your choice. 
 
 ## 1. Download Anaconda for free to get access to Spyder or RStudio
-Spyder is an open source data handling programme which uses Python language. RStudio is similar to Spyder in that it is also an open source programme. RStudio uses R programming language. https://www.anaconda.com/distribution/
+Spyder is an open source data handling programme which uses Python language. RStudio is similar to Spyder in that it is also an open source programme; RStudio uses R programming language [1]. https://www.anaconda.com/distribution/
 
 ## 2. Pick a flood
 This could be a flood event which affected you or one which you saw in the news. Take note of the month and year that this flood took place in. 
@@ -514,6 +514,10 @@ title(main="River Aire Data")
   <img width="700" height="700" src="https://github.com/Rivers-Project-2018/How-to-do-FEV-Analysis/blob/master/River Aire Plot from Automated RCode.png">
    <figcaption>Figure 2: The plot attained after using the automated R code.</figcaption>
 </p>
+
+## References
+
+1. RStudio. *RStudio*. [Online]. [2018]. [Accessed 18 April 2019]. Available from: https://www.rstudio.com
 
 **References for Section 6.2:**
 
